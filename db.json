@@ -6,6 +6,13 @@
       "description": "Tshirt White with round neck. Available in small, medium, large sizes.",
       "price": 100,
       "image": "/images/tshirt-white.jpeg"
+    },
+    {
+      "id": 2,
+      "title": "Tourser",
+      "description": "Trouser for men. Available in small, medium, large sizes.",
+      "price": 100,
+      "image": "/images/trouser.jpeg"
     }
   ],
   "favourites": [],

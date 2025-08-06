@@ -3,6 +3,9 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Providers } from '@/redux/providers'
 import QueryProvider from '@/query/QueryProvider'
+import Navbar from '@/presentation/components/Navbar'
+import CartModal from '@/presentation/components/CartModal'
+import { SnackbarProvider } from '@/presentation/providers/SnackbarProvider'
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,7 +31,13 @@ export default function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <Providers>
-          <QueryProvider>{children}</QueryProvider>
+          <QueryProvider>
+            <SnackbarProvider>
+            <Navbar />
+            <CartModal />
+            {children}
+            </SnackbarProvider>
+          </QueryProvider>
         </Providers>
       </body>
     </html>

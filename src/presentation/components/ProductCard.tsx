@@ -1,9 +1,12 @@
+'use client'
 import { Card, CardContent, CardMedia, Typography, Button, Stack } from '@mui/material'
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppDispatch } from '@/redux/hooks'
 import { addToCart } from '@/redux/slices/cartSlice'
 import { toggleFavourite } from '@/redux/slices/favouriteSlice'
 import { useRouter } from 'next/navigation'
+import CartModal from './CartModal'
+import { useSnackbar } from '@/presentation/providers/SnackbarProvider'
 
 interface Props {
   product: {
@@ -17,12 +20,20 @@ interface Props {
 const ProductCard: React.FC<Props> = ({ product }) => {
   const dispatch = useAppDispatch()
   const router = useRouter()
+  const [open, setOpen] = useState(false)
+
+  const showSnackbar = useSnackbar()
+
+  const handleAddToCart = () => {
+    dispatch(addToCart(product))
+    showSnackbar('Added to cart!')
+  }
 
   return (
     <Card sx={{ maxWidth: 300 }}>
       <CardMedia
         component="img"
-        height="140"
+        height="320"
         image={product.image}
         alt={product.title}
         style={{ cursor: 'pointer' }}
@@ -36,7 +47,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
           ${product.price}
         </Typography>
         <Stack direction="row" spacing={1} mt={2}>
-          <Button variant="outlined" size="small" onClick={() => dispatch(addToCart(product))}>
+          <Button variant="outlined" size="small" onClick={handleAddToCart}>
             Add to Cart
           </Button>
           <Button variant="outlined" size="small" onClick={() => dispatch(toggleFavourite(product))}>
@@ -44,6 +55,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
           </Button>
         </Stack>
       </CardContent>
+      <CartModal open={open} onClose={() => setOpen(false)} productTitle={product.title} />
     </Card>
   )
 }
