@@ -1,3 +1,5 @@
+import ProductFeed from '@/presentation/containers/ProductFeed'
+
 export default function Home() {
-  return <h1>Welcome to E-Commerce Mini App</h1>
+  return <ProductFeed />
 }
