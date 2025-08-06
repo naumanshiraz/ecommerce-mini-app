@@ -24,3 +24,15 @@ This app is built using clean architecture, atomic design, and scalable folder s
    ```bash
    git clone https://github.com/your-username/ecommerce-mini-app.git
    cd ecommerce-mini-app
+
+2. **Install Dependencies**
+   ```bash
+   npm install
+
+   ```bash
+   npm run json-server
+
+   ```
+   npm run dev
+
+   Visit: http://localhost:3000
