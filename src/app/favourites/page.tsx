@@ -1,3 +1,3 @@
-export default function Home() {
-  return <h1>Welcome to E-Commerce Mini App</h1>
+export default function FavouritesPage() {
+  return <h1>Favourites</h1>
 }
