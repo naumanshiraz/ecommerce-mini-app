@@ -1,0 +1,10 @@
+.add-to-cart-button {
+  border: 1px solid black;
+  color: black;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    transform: scale(1.05);
+  }
+}

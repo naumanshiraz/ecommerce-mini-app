@@ -59,7 +59,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
           ${product.price}
         </Typography>
         <Stack direction="row" spacing={1} mt={2}>
-          <Button variant="outlined" size="small" onClick={handleAddToCart}>
+          <Button variant="outlined" size="small" onClick={handleAddToCart} className="add-to-cart-button">
             {t('add_to_cart')}
           </Button>
           <IconButton
