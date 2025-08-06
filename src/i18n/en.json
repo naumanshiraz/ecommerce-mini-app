@@ -1,0 +1,16 @@
+{
+  "home": "Home",
+  "cart": "Cart",
+  "favourites": "Favourites",
+  "add_to_cart": "Add to Cart",
+  "added_to_cart": "Added to cart",
+  "added_to_favourites": "Added to favourites",
+  "removed_from_favourites": "Removed from favourites",
+  "shopping_cart": "Shopping Cart",
+  "empty_cart": "Your cart is empty.",
+  "continue_shopping": "Continue Shopping",
+  "checkout": "Checkout",
+  "view_cart": "View Cart",
+  "close": "Fermer",
+  "total": "Total"
+}

@@ -3,10 +3,11 @@ import { Card, CardContent, CardMedia, Typography, Button, Stack } from '@mui/ma
 import React, { useState } from 'react'
 import { useAppDispatch } from '@/redux/hooks'
 import { addToCart } from '@/redux/slices/cartSlice'
-import { toggleFavourite } from '@/redux/slices/favouriteSlice'
+import { addToFavourites } from '@/redux/slices/favouriteSlice'
 import { useRouter } from 'next/navigation'
 import CartModal from './CartModal'
 import { useSnackbar } from '@/presentation/providers/SnackbarProvider'
+import { useLang } from '@/presentation/context/LanguageContext'
 
 interface Props {
   product: {
@@ -24,9 +25,16 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
   const showSnackbar = useSnackbar()
 
+  const { t } = useLang()
+
   const handleAddToCart = () => {
     dispatch(addToCart(product))
-    showSnackbar('Added to cart!')
+    showSnackbar(t('added_to_cart'))
+  }
+
+  const handleAddToFavourites = () => {
+    dispatch(addToFavourites(product))
+    showSnackbar(t('added_to_favourites'))
   }
 
   return (
@@ -48,9 +56,9 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         </Typography>
         <Stack direction="row" spacing={1} mt={2}>
           <Button variant="outlined" size="small" onClick={handleAddToCart}>
-            Add to Cart
+            {t('add_to_cart')}
           </Button>
-          <Button variant="outlined" size="small" onClick={() => dispatch(toggleFavourite(product))}>
+          <Button variant="outlined" size="small" onClick={handleAddToFavourites}>
             ❤️
           </Button>
         </Stack>

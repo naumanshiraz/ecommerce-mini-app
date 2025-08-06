@@ -1,0 +1,16 @@
+{
+  "home": "Accueil",
+  "cart": "Panier",
+  "favourites": "Favoris",
+  "add_to_cart": "Ajouter au panier",
+  "added_to_cart": "Ajouté au panier",
+  "added_to_favourites": "Ajouté aux favoris",
+  "removed_from_favourites": "Supprimé des favoris",
+  "shopping_cart": "Panier d'achat",
+  "empty_cart": "Votre panier est vide.",
+  "continue_shopping": "Continuer vos achats",
+  "checkout": "Passer à la caisse",
+  "view_cart": "Voir le panier",
+  "close": "Fermer",
+  "total": "Total"
+}

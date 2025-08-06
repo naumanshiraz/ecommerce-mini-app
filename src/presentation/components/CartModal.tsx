@@ -11,6 +11,7 @@ import {
   IconButton,
   Stack,
   Divider,
+  Box
 } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 import DeleteIcon from '@mui/icons-material/Delete'
@@ -24,11 +25,16 @@ import {
   removeFromCart,
 } from '@/redux/slices/cartSlice'
 import { closeCartModal } from '@/redux/slices/cartModalSlice'
+import { useRouter } from 'next/navigation';
+import { useLang } from '@/presentation/context/LanguageContext'
 
 const CartModal = () => {
+  const router = useRouter();
   const dispatch = useAppDispatch()
   const isOpen = useAppSelector(state => state.cartModal.isOpen)
   const cartItems = useAppSelector(state => state.cart.items)
+
+   const { t } = useLang()
 
   const total = cartItems.reduce(
     (acc, item) => acc + item.price * (item.quantity || 1),
@@ -38,7 +44,7 @@ const CartModal = () => {
   return (
     <Dialog open={isOpen} onClose={() => dispatch(closeCartModal())} fullWidth>
       <DialogTitle>
-        Shopping Cart
+        {t('shopping_cart')}
         <IconButton
           onClick={() => dispatch(closeCartModal())}
           sx={{ position: 'absolute', right: 8, top: 8 }}
@@ -86,13 +92,19 @@ const CartModal = () => {
           ))
         )}
         <Divider sx={{ my: 2 }} />
-        <Typography variant="h6">Total: ${total.toFixed(2)}</Typography>
+        <Typography variant="h6">{t('total')}: ${total.toFixed(2)}</Typography>
       </DialogContent>
       <DialogActions>
-        <Button onClick={() => dispatch(closeCartModal())}>Close</Button>
-        <Button variant="contained" color="primary">
-          Checkout
-        </Button>
+        <Box display="flex" justifyContent="space-between" width="100%">
+          <Button onClick={() => router.push('/cart')}>{t('view_cart')}</Button>
+
+          <Box>
+            <Button onClick={() => dispatch(closeCartModal())}>{t('close')}</Button>
+            <Button variant="contained" color="primary" sx={{ ml: 1 }}>
+              {t('checkout')}
+            </Button>
+          </Box>
+        </Box>
       </DialogActions>
     </Dialog>
   )

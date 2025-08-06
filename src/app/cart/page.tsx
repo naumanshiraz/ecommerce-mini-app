@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from '@/store';
 import { removeFromCart } from '@/redux/slices/cartSlice';
 import { Button, Container, Typography, Box, Card, CardMedia, CardContent } from '@mui/material';
+import Link from 'next/link'
 
 const CartPage = () => {
   const cartItems = useSelector((state: RootState) => state.cart.items);
@@ -11,9 +12,16 @@ const CartPage = () => {
 
   return (
     <Container sx={{ mt: 4 }}>
-      <Typography variant="h4" gutterBottom>
-        Your Cart
-      </Typography>
+    
+      <Box display="flex" justifyContent="space-between" alignItems="center" mb={3}>
+        <Typography variant="h4" gutterBottom>
+           Your Cart
+        </Typography>
+
+        <Link href="/" passHref>
+          <Button variant="outlined">Back to Home</Button>
+        </Link>
+      </Box>
 
       {cartItems.length === 0 ? (
         <Typography>Your cart is empty.</Typography>
