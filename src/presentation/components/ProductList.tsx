@@ -1,4 +1,5 @@
 import Grid from '@mui/material/Grid'
+
 import ProductCard from './ProductCard'
 
 export default function ProductList({ products }: { products: any[] }) {
