@@ -1,7 +1,7 @@
 'use client'
-import { Card, CardContent, CardMedia, Typography, Button, Stack } from '@mui/material'
+import { Card, CardContent, CardMedia, Typography, Button, Stack, IconButton} from '@mui/material'
 import React, { useState } from 'react'
-import { useAppDispatch } from '@/redux/hooks'
+import { useAppDispatch, useAppSelector } from '@/redux/hooks'
 import { addToCart } from '@/redux/slices/cartSlice'
 import { addToFavourites } from '@/redux/slices/favouriteSlice'
 import { useRouter } from 'next/navigation'
@@ -27,6 +27,9 @@ const ProductCard: React.FC<Props> = ({ product }) => {
 
   const { t } = useLang()
 
+  const favourites = useAppSelector(state => state.favourites.items)
+  const isFavourite = favourites.some(item => item.id === product.id)
+
   const handleAddToCart = () => {
     dispatch(addToCart(product))
     showSnackbar(t('added_to_cart'))
@@ -38,7 +41,7 @@ const ProductCard: React.FC<Props> = ({ product }) => {
   }
 
   return (
-    <Card sx={{ maxWidth: 300 }}>
+    <Card sx={{ width: '100%', maxWidth: 300, mx: 'auto' }}>
       <CardMedia
         component="img"
         height="320"
@@ -46,9 +49,10 @@ const ProductCard: React.FC<Props> = ({ product }) => {
         alt={product.title}
         style={{ cursor: 'pointer' }}
         onClick={() => router.push(`/product/${product.id}`)}
+        sx={{ objectFit: 'contain', p: 2 }}
       />
       <CardContent>
-        <Typography gutterBottom variant="h6" component="div">
+        <Typography gutterBottom component="div" variant="subtitle1" fontWeight="bold" noWrap>
           {product.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
@@ -58,10 +62,15 @@ const ProductCard: React.FC<Props> = ({ product }) => {
           <Button variant="outlined" size="small" onClick={handleAddToCart}>
             {t('add_to_cart')}
           </Button>
-          <Button variant="outlined" size="small" onClick={handleAddToFavourites}>
-            ❤️
-          </Button>
+          <IconButton
+            size="small"
+            onClick={handleAddToFavourites}
+            sx={{ color: isFavourite ? 'red' : 'black', border: '1px solid', borderColor: isFavourite ? 'red' : 'black' }}
+          >
+            {isFavourite ? '❤️' : '🖤'}
+          </IconButton>
         </Stack>
+        
       </CardContent>
       <CartModal open={open} onClose={() => setOpen(false)} productTitle={product.title} />
     </Card>
